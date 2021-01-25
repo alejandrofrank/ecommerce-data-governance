@@ -1,4 +1,4 @@
-# _Know your biz_
+# Plans
 ## About this project:
 My aim with this project is to create a whole B2C data governance architecture. From transactional data to social media and PPC data in one data warehouse. I think this can be really valuable since companies usually hire a whole consulting team for only one of this tasks.
 Below we can see more specifications about the project with a Schema for the finished project.
