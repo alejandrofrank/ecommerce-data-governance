@@ -86,6 +86,18 @@ CREATE TABLE orders
   customer_id    INTEGER    NULL,
   product_id     INTEGER    NOT NULL,
   quantity       INTEGER    NOT NULL
-)
+);
 """)
+
+#copy query
+
+staging_copy = ("""
+    COPY {} 
+    FROM {'s3://ciphor/TABLE_A.csv'}
+    CREDENTIALS 'aws_iam_role={}'
+    delimiter ','
+    STATUPDATE ON
+    region 'us-west-2'
+    removequotes;
+""").format(LOG_DATA, IAM_ROLE, LOG_JSONPATH)
 
