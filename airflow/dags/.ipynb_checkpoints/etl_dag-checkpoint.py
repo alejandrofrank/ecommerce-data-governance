@@ -13,7 +13,7 @@ AWS_KEY = os.environ.get('AWS_KEY')
 AWS_SECRET = os.environ.get('AWS_SECRET')
 
 default_args = {
-    'owner': 'udacity',
+    'owner': 'Alejandro Frank',
     'start_date': datetime(2021, 1, 20),
     'depends_on_past': False,
     'retries': 3,
@@ -33,25 +33,14 @@ start_operator = DummyOperator(task_id='Begin_execution',  dag=dag)
 
 
 stage_events_to_redshift = StageToRedshiftOperator(
-    task_id='Stage_events',
+    task_id='Stage_table',
     dag=dag,
-    table="staging_events",
+    table="staging_table",
     redshift_conn_id="redshift",
     aws_credentials_id="aws_credentials",
-    s3_bucket="udacity-dend",
-    s3_key="log_data",
-    json_path="s3://udacity-dend/log_json_path.json"
-)
-
-stage_songs_to_redshift = StageToRedshiftOperator(
-    task_id='Stage_songs',
-    dag=dag,
-    table="staging_songs",
-    redshift_conn_id = "redshift",
-    aws_credentials_id = "aws_credentials",
-    s3_bucket = "udacity-dend",
-    s3_key = "song-data/A/A/A",
-    json_path = "auto"
+    s3_bucket="RELLENAR",
+    s3_key="RELLENAR",
+    json_path="QUITAR POR CSV, ver si necesito esto, no creo."
 )
 
 load_songplays_table = LoadFactOperator(

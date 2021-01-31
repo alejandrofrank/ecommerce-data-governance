@@ -1,21 +1,22 @@
 class SqlQueries:
     location_table_insert = ("""
         INSERT INTO location (
-            country_id,
-            country
+            country_name
         )
         SELECT DISTINCT 
-            
-            FROM staging_table
+            Country
+        FROM staging_table;
     """)
 
     invoice_table_insert = ("""
         INSERT INTO invoices (
-              invoice_id,
-              InvoiceNo
+              invoice_num,
+              invoice_date
         )
         SELECT DISTINCT 
-        FROM staging_table
+            InvoiceNo,
+            InvoiceDate
+        FROM staging_table;
     """)
 
     customer_table_insert = ("""
@@ -23,19 +24,43 @@ class SqlQueries:
             customer_id
         )
         SELECT DISTINCT 
-        FROM staging_table
+            CustomerID
+        FROM staging_table;
     """)
 
-    artist_table_insert = ("""
-        INSERT INTO artists (
-            artistid,
-            name,
-            location,
-            latitude,
-            longitude        
+    product_table_insert = ("""
+        INSERT INTO products (
+            stock_code,
+            description,
+            UnitPrice       
         )
-        SELECT DISTINCT 
-        FROM staging_table
+        SELECT DISTINCT
+            StockCode,
+            Description,
+            UnitPrice   
+        FROM staging_table;
+    """)
+    
+    order_table_insert = ("""
+        INSERT INTO orders (
+        country_id,
+        invoice_num,
+        invoice_date,
+        customer_id,
+        product_id,
+        quantity
+        )
+        SELECT 
+            L.country_id,
+            ST.InvoiceNo,
+            ST.invoice_date,
+            CU.customer_id,
+            P.product_id,
+            ST.quantity
+        FROM staging_table ST
+        LEFT JOIN location L on ST.Country = L.country_name
+        LEFT JOIN products P on ST.StockCode = P.stock_code
+            
     """)
 
     time_table_insert = ("""
@@ -50,5 +75,5 @@ class SqlQueries:
         )
         SELECT InvoiceDate, extract(hour from InvoiceDate), extract(day from InvoiceDate), extract(week from InvoiceDate), 
                extract(month from InvoiceDate), extract(year from InvoiceDate), extract(dayofweek from InvoiceDate)
-        FROM staging_table
+        FROM staging_table;
     """)

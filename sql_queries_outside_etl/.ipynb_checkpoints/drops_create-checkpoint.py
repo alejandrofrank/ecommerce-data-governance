@@ -19,14 +19,14 @@ time_table_drop = "DROP TABLE IF EXISTS time;"
 staging_table = ("""
 CREATE TABLE staging_songs
 (
-  InvoiceNo     INTEGER    NOT NULL,
-  StockCode     VARCHAR    NOT NULL,
-  Description   VARCHAR    NULL,
-  Quantity      INTEGER    NOT NULL,
-  InvoiceDate   TIMESTAMP  NOT NULL,
-  UnitPrice     FLOAT      NOT NULL,
-  CustomerID    INTEGER    NULL,
-  Country       VARCHAR    NOT NULL
+  InvoiceNo     INTEGER,
+  StockCode     VARCHARL,
+  Description   VARCHAR,
+  Quantity      INTEGER,
+  InvoiceDate   TIMESTAMP,
+  UnitPrice     FLOAT,
+  CustomerID    INTEGER,
+  Country       VARCHAR
 );
 """)
 
@@ -34,15 +34,15 @@ location_table = ("""
 CREATE TABLE location
 (
   country_id    BIGINT IDENTITY(0,1)  NOT NULL PRIMARY KEY,
-  country       VARCHAR
+  country_name       VARCHAR
 );
 """)
 
 invoice_table = ("""
 CREATE TABLE invoices
 (
-  invoice_id    BIGINT IDENTITY(0,1)  NOT NULL PRIMARY KEY,
-  InvoiceNo     INTEGER NOT NULL
+  invoice_num     INTEGER NOT NULL PRIMARY KEY,
+  invoice_date    TIMESTAMP  NOT NULL
 );
 """)
 
