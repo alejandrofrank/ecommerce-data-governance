@@ -60,6 +60,7 @@ class SqlQueries:
         FROM staging_table ST
         LEFT JOIN location L on ST.Country = L.country_name
         LEFT JOIN products P on ST.StockCode = P.stock_code
+        LEFT JOIN customers CU on ST.CustomerID = CU.customer_id
             
     """)
 

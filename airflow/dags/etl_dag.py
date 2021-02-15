@@ -14,7 +14,7 @@ AWS_SECRET = os.environ.get('AWS_SECRET')
 
 default_args = {
     'owner': 'Alejandro Frank',
-    'start_date': datetime(2021, 1, 20),
+    'start_date': datetime(2021, 2, 15),
     'depends_on_past': False,
     'retries': 3,
     'retry_delay': timedelta(minutes=1),
@@ -22,11 +22,11 @@ default_args = {
     'email_on_retry': False
 }
 
-dag = DAG('udac_example_dag',
+dag = DAG('ecommerce_data',
           default_args=default_args,
-          description='Load and transform data in Redshift with Airflow',
+          description='Build an entire ecommerce marketing pipeline',
           schedule_interval='@hourly',
-          template_searchpath = ['/home/workspace/airflow']
+          template_searchpath = ['//c/Users/aleja/Desktop/Alex/Education/Udactity/Projects/capstone_project/airflow']
         )
 
 start_operator = DummyOperator(task_id='Begin_execution',  dag=dag)

@@ -1,8 +1,8 @@
 #DROP QUERIES
 
-staging_table_drop = "DROP TABLE IF EXISTS staging"
+staging_table_drop = "DROP TABLE IF EXISTS staging;"
 
-location_table_drop = "DROP TABLE IF EXISTS location"
+location_table_drop = "DROP TABLE IF EXISTS location;"
 
 orders_table_drop = "DROP TABLE IF EXISTS orders;"
 
@@ -41,6 +41,7 @@ CREATE TABLE location
 invoice_table = ("""
 CREATE TABLE invoices
 (
+  invoice_id    BIGINT IDENTITY(0,1)  NOT NULL PRIMARY KEY,
   invoice_num     INTEGER NOT NULL PRIMARY KEY,
   invoice_date    TIMESTAMP  NOT NULL
 );
@@ -85,7 +86,8 @@ CREATE TABLE orders
   invoice_date   TIMESTAMP  NOT NULL,
   customer_id    INTEGER    NULL,
   product_id     INTEGER    NOT NULL,
-  quantity       INTEGER    NOT NULL
+  quantity       INTEGER    NOT NULL,
+  unit_price     FLOAT      NOT NULL
 );
 """)
 

@@ -41,6 +41,7 @@ CREATE TABLE location
 invoice_table = ("""
 CREATE TABLE invoices
 (
+  invoice_id    BIGINT IDENTITY(0,1)  NOT NULL PRIMARY KEY,
   invoice_num     INTEGER NOT NULL PRIMARY KEY,
   invoice_date    TIMESTAMP  NOT NULL
 );
@@ -85,7 +86,8 @@ CREATE TABLE orders
   invoice_date   TIMESTAMP  NOT NULL,
   customer_id    INTEGER    NULL,
   product_id     INTEGER    NOT NULL,
-  quantity       INTEGER    NOT NULL
+  quantity       INTEGER    NOT NULL,
+  unit_price     FLOAT      NOT NULL
 );
 """)
 
@@ -93,7 +95,7 @@ CREATE TABLE orders
 
 staging_copy = ("""
     COPY {} 
-    FROM {'s3://ciphor/TABLE_A.csv'}
+    FROM {}
     CREDENTIALS 'aws_iam_role={}'
     delimiter ','
     STATUPDATE ON
